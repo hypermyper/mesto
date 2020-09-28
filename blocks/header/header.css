@@ -1,13 +1,13 @@
 .header {
   display: flex;
   border-bottom: 1px solid #545454;
-  margin: 0 199px;
+  margin: 0;
   padding-bottom: 40px;
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 980px) {
   .header {
     margin: 0;
-    padding: 0 0 31px 27px;
+    padding: 0 27px 31px 27px;
   }
 }
