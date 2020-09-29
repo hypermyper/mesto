@@ -1,0 +1,9 @@
+.element__body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 15px 31px 21px;
+  background-color: #fff;
+  overflow: hidden;
+  z-index: 1;
+}

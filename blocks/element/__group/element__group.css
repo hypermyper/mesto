@@ -1,0 +1,13 @@
+.element__group {
+  background-image: url(../../../images/group.svg);
+  width: 21px;
+  height: 18px;
+  background-repeat: no-repeat;
+  transition: opacity ease 0.3s;
+  min-width: 21px;
+  margin-left: 5px;
+}
+
+.element__group:hover {
+  opacity: 0.6;
+}
