@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./pages/index.css">
-    <script src="scripts/index.js"></script>
     <title>Mesto — Russia</title>
 </head>
 <body class="root">
@@ -69,5 +68,15 @@
     </section>
     <footer class="footer">© 2020 Mesto Russia</footer>
   </div>
+  <section class="overlay">
+    <form class="form">
+      <img class="form__close-icon" src="images/close-icon.svg" alt="Закрыть форму">
+      <h5 class="form__title">Редактировать профиль</h5>
+      <input type="text" name="field_1" class="form__input field_1" value="">
+      <input type="text" name="field_2" class="form__input field_2" value="">
+      <button type="submit" class="form__submit-button">Сохранить</button>
+    </form>
+  </section>
+  <script src="./scripts/index.js"></script>
 </body>
 </html>
