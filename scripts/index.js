@@ -2,8 +2,11 @@ let buttonOpenPopup = document.querySelector(".profile_info__edit_button");
 let buttonClosePopup = document.querySelector(".form__close-icon");
 let popup = document.querySelector(".overlay");
 
-document.querySelector(".field_1").value = document.querySelector(".profile_info__title").textContent;
-document.querySelector(".field_2").value = document.querySelector(".profile_info__description").textContent;
+let field1 = document.querySelector(".field_1");
+let field2 = document.querySelector(".field_2");
+
+field1.value = document.querySelector(".profile_info__title").textContent;
+field2.value = document.querySelector(".profile_info__description").textContent;
 
 function popupToggle () {
   popup.classList.toggle("overlay_is-opened");
