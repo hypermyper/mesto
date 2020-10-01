@@ -19,3 +19,7 @@
 **GitHub Pages**
 
 * [Ссылка на GitHub Pages](https://hypermyper.github.io/mesto/)
+<<<<<<< HEAD
+=======
+
+>>>>>>> f4e7b4b1894171642b215a5d3f22d27cb2720009
