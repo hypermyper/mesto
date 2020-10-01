@@ -1,6 +1,5 @@
-.profile_info__description {
+.profile-info__description {
   margin: 0;
-  font-family: Inter;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -9,7 +8,7 @@
 }
 
 @media (max-width: 320px) {
-  .profile_info__description {
+  .profile-info__description {
     font-size: 14px;
     line-height: 17px;
     margin-top: 14px;

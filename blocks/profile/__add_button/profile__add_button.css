@@ -3,6 +3,12 @@
   height: 50px;
   background-image: url('../../../images/add_button.svg');
   transition: all ease 0.3s;
+  border: 0;
+  background-color: #000;
+}
+
+.profile__add_button:focus {
+  outline: none;
 }
 
 @media (max-width: 700px) {

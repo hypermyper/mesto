@@ -1,11 +1,12 @@
 .element__group {
-  background-image: url(../../../images/group.svg);
+  background: url(../../../images/group.svg) #fff;
   width: 21px;
   height: 18px;
   background-repeat: no-repeat;
   transition: opacity ease 0.3s;
   min-width: 21px;
   margin-left: 5px;
+  border: 0;
 }
 
 .element__group:hover {

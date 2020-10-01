@@ -1,0 +1,24 @@
+.profile-info__edit_button {
+  margin: 0 17px;
+  transition: all ease 0.3s;
+  border: 0;
+  background: none;
+  padding: 0;
+  font-size: 0;
+}
+
+.profile-info__edit_button:focus {
+  outline: none;
+}
+
+@media (max-width: 320px) {
+  .profile-info__edit_button {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.profile-info__edit_button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
