@@ -1,4 +1,4 @@
-.profile__add_button {
+.profile__add-button {
   width: 150px;
   height: 50px;
   background-image: url('../../../images/add_button.svg');
@@ -7,25 +7,25 @@
   background-color: #000;
 }
 
-.profile__add_button:focus {
+.profile__add-button:focus {
   outline: none;
 }
 
 @media (max-width: 700px) {
-  .profile__add_button {
+  .profile__add-button {
     margin-top: 36px;
   }
 }
 
 @media (max-width: 320px) {
-  .profile__add_button {
+  .profile__add-button {
     margin-top: 36px;
     background-image: url('../../../images/add_button_mobile.svg');
     width: 282px;
   }
 }
 
-.profile__add_button:hover {
+.profile__add-button:hover {
   opacity: 0.6;
   cursor: pointer;
 }

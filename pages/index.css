@@ -6,11 +6,11 @@
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
-@import url(../blocks/profile/__add_button/profile__add_button.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/profile-info/profile-info.css);
-@import url(../blocks/profile-info/__title_wrap/profile-info__title_wrap.css);
+@import url(../blocks/profile-info/__title-wrap/profile-info__title-wrap.css);
 @import url(../blocks/profile-info/__title/profile-info__title.css);
-@import url(../blocks/profile-info/__edit_button/profile-info__edit_button.css);
+@import url(../blocks/profile-info/__edit-button/profile-info__edit-button.css);
 @import url(../blocks/profile-info/__description/profile-info__descripton.css);
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);

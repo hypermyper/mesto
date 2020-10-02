@@ -1,4 +1,4 @@
-let buttonOpenPopup = document.querySelector(".profile-info__edit_button");
+let buttonOpenPopup = document.querySelector(".profile-info__edit-button");
 let popup = document.querySelector(".overlay");
 let formElement = document.querySelector(".form");
 let buttonClosePopup = formElement.querySelector(".form__close-icon");
@@ -17,10 +17,14 @@ function openPopup () {
   popupToggle();
 }
 
-function closePopup (event) {
+function closePopupOverlay (event) {
   if(event.target !== event.currentTarget) {
     return;
   }
+  popupToggle();
+}
+
+function closePopup () {
   popupToggle();
 }
 
@@ -31,7 +35,7 @@ function formSubmitHandler (event) {
     popupToggle();
 }
 
-popup.addEventListener("click", closePopup);
+popup.addEventListener("click", closePopupOverlay);
 buttonOpenPopup.addEventListener("click", openPopup);
 buttonClosePopup.addEventListener("click", closePopup);
 formElement.addEventListener('submit', formSubmitHandler);
