@@ -24,10 +24,6 @@ function closePopupOverlay (event) {
   popupToggle();
 }
 
-function closePopup () {
-  popupToggle();
-}
-
 function formSubmitHandler (event) {
   event.preventDefault();
     profileInfo.textContent = nameInput.value;
@@ -37,5 +33,6 @@ function formSubmitHandler (event) {
 
 popup.addEventListener("click", closePopupOverlay);
 buttonOpenPopup.addEventListener("click", openPopup);
-buttonClosePopup.addEventListener("click", closePopup);
+// СПАСИБО ЗА КОММЕНТАРИИ!
+buttonClosePopup.addEventListener("click", popupToggle);
 formElement.addEventListener('submit', formSubmitHandler);
