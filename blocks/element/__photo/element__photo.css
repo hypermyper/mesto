@@ -4,7 +4,3 @@
   height: 282px;
   transition: all ease 0.8s;
 }
-
-.element__photo:hover {
-  transform: scale(1.03);
-}
