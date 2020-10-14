@@ -26,61 +26,37 @@
         <button type="button" class="profile__add-button"></button>
       </section>
       <section class="elements">
-        <article class="element">
-          <img src="./images/vnovgorod_thumb.jpg" class="element__photo" alt="Великий Новгород">
-          <div class="element__body">
-            <h3 class="element__title">Великий Новгород</h3>
-            <button type="button" class="element__group"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img src="./images/kostroma_thumb.jpg" class="element__photo" alt="Кострома">
-          <div class="element__body">
-            <h3 class="element__title">Кострома</h3>
-            <button type="button" class="element__group"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img src="./images/nnovgorod_thumb.jpg" class="element__photo" alt="Нижний Новгород">
-          <div class="element__body">
-            <h3 class="element__title">Нижний Новгород</h3>
-            <button type="button" class="element__group"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img src="./images/kazan_thumb.jpg" class="element__photo" alt="Казань">
-          <div class="element__body">
-            <h3 class="element__title">Казань</h3>
-            <button type="button" class="element__group"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img src="./images/rostov_thumb.jpg" class="element__photo" alt="Ростов">
-          <div class="element__body">
-            <h3 class="element__title">Ростов</h3>
-            <button type="button" class="element__group"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img src="./images/ryazan_thumb.jpg" class="element__photo" alt="Рязань">
-          <div class="element__body">
-            <h3 class="element__title">Рязань</h3>
-            <button type="button" class="element__group"></button>
-          </div>
-        </article>
       </section>
     </main>
     <footer><p class="footer">© 2020 Mesto Russia</p></footer>
   </div>
-  <section class="overlay">
-    <form class="form" name="edit-profile">
-      <button type="button" class="form__close-icon"><img src="images/close-icon.svg" alt="Закрыть форму"></button>
+  <section class="overlay overlay_edit-profile">
+    <form class="form form_edit-profile" name="edit-profile">
+      <button type="button" class="form__close-icon form__close-icon_edit-profile"><img src="images/close-icon.svg" alt="Закрыть форму"></button>
       <h5 class="form__title">Редактировать профиль</h5>
       <input type="text" name="field_1" class="form__input form__input_name" value="">
       <input type="text" name="field_2" class="form__input form__input_description" value="">
       <button type="submit" class="form__submit-button">Сохранить</button>
     </form>
   </section>
+  <section class="overlay overlay_new-place">
+    <form class="form form_new-place" name="new-place">
+      <button type="button" class="form__close-icon form__close-icon_new-place"><img src="images/close-icon.svg" alt="Закрыть форму"></button>
+      <h5 class="form__title">Новое место</h5>
+      <input type="text" name="field_1" class="form__input form__input_new-place" value="" placeholder="Название">
+      <input type="text" name="field_2" class="form__input form__input_image-link" value="" placeholder="Ссылка на картинку">
+      <button type="submit" class="form__submit-button">Сохранить</button>
+    </form>
+  </section>
+  <template class="template">
+    <article class="element">
+      <img src="" class="element__photo" alt="">
+      <div class="element__body">
+        <h3 class="element__title"></h3>
+        <button type="button" class="element__group"></button>
+      </div>
+    </article>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
