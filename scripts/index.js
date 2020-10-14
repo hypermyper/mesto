@@ -51,11 +51,17 @@ const renderCards = () => {
   listCards.append(...cards);
 }
 
+const handlerRemove = (event) => {
+  event.target.closest('.element').remove();
+}
+
 const getCards = (data) => {
   const card = template.content.cloneNode(true);
   card.querySelector('.element__photo').src = data.link;
   card.querySelector('.element__photo').alt = data.name;
   card.querySelector('.element__title').innerText = data.name;
+  const removeButton = card.querySelector('.element__trash');
+  removeButton.addEventListener('click', handlerRemove);
   return card;
 }
 
