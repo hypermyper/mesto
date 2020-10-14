@@ -55,12 +55,18 @@ const handlerRemove = (event) => {
   event.target.closest('.element').remove();
 }
 
+
 const getCards = (data) => {
   const card = template.content.cloneNode(true);
   card.querySelector('.element__photo').src = data.link;
   card.querySelector('.element__photo').alt = data.name;
   card.querySelector('.element__title').innerText = data.name;
   const removeButton = card.querySelector('.element__trash');
+  const favoriteButton = card.querySelector('.element__group');
+
+  favoriteButton.addEventListener('click', () => {
+    favoriteButton.classList.toggle("element__group_selected");
+  });
   removeButton.addEventListener('click', handlerRemove);
   return card;
 }
@@ -89,7 +95,6 @@ const formEditProfileSubmitHandler = (event) => {
     popupToggle(overlayEditProfile);
 }
 
-
 const openPopupNewPlace = () => {
   newPlaceName.value = '';
   newPlaceImage.value = '';
@@ -105,14 +110,11 @@ const closePopupNewPlace =  (event) => {
 
 const formNewPlaceSubmitHandler = (event) => {
   event.preventDefault();
-    //profileInfo.textContent = nameInput.value;
-    //profileDescription.textContent = jobInput.value;
     const item = getCards({
       name: newPlaceName.value,
       link: newPlaceImage.value
     });
     listCards.prepend(item);
-
     popupToggle(overlayNewPlace);
 }
 
