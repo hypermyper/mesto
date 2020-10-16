@@ -21,7 +21,7 @@ const buttonClosePopupNewPlace = formNewPlace.querySelector('.form__close-icon_n
 const newPlaceName = formNewPlace.querySelector('.form__input_new-place');
 const newPlaceImage = formNewPlace.querySelector('.form__input_image-link');
 
-const listCards = document.querySelector('.elements');
+const cardsList = document.querySelector('.elements');
 const template = document.querySelector('.template');
 
 const initialCards = [
@@ -51,16 +51,20 @@ const initialCards = [
   }
 ];
 
+const popupToggle = (popup) => {
+  popup.classList.toggle('overlay_opened');
+}
+
 const renderCards = () => {
-  const cards = initialCards.map(card => getCards(card));
-  listCards.append(...cards);
+  const cards = initialCards.map(card => getCard(card));
+  cardsList.append(...cards);
 }
 
 const handlerRemove = (event) => {
   event.target.closest(".element").remove();
 }
 
-const getCards = (data) => {
+const getCard = (data) => {
   const card = template.content.cloneNode(true);
   const elementPhoto = card.querySelector('.element__photo');
   elementPhoto.src = data.link;
@@ -69,44 +73,35 @@ const getCards = (data) => {
   const removeButton = card.querySelector('.element__trash');
   const favoriteButton = card.querySelector('.element__group');
 
-  const closeImagePopup = (event) => {
-    if(event.target !== event.currentTarget) {
-      return;
-    }
-    overlayImagePopup.classList.remove('overlay_is-opened');
-  }
-
-  overlayImagePopup.addEventListener('click', closeImagePopup);
-  buttonCloseImagePopup.addEventListener('click', () => {
-    overlayImagePopup.classList.remove('overlay_is-opened');
-  });
   elementPhoto.addEventListener('click', () => {
     imagePopup.src = data.link;
     overlayFigureCaption.innerText = data.name;
-    overlayImagePopup.classList.add('overlay_is-opened');
+    popupToggle(overlayImagePopup);
   });
 
   favoriteButton.addEventListener('click', () => {
     favoriteButton.classList.toggle('element__group_selected');
   });
   removeButton.addEventListener('click', handlerRemove);
+
   return card;
 }
 
-const popupToggle = (overlay) => {
-  overlay.classList.toggle('overlay_is-opened');
+const closeOnOverlayClick = (event, popup) => {
+  if(event.target !== event.currentTarget) {
+    return;
+  }
+  popupToggle(popup);
 }
+
+overlayImagePopup.addEventListener('click', (event) => closeOnOverlayClick(event, overlayImagePopup));
+buttonCloseImagePopup.addEventListener('click', () => {
+  popupToggle(overlayImagePopup);
+});
 
 const openPopupEditProfile = () => {
   nameInput.value = profileInfo.textContent;
   jobInput.value = profileDescription.textContent;
-  overlayEditProfile.classList.add('overlay_is-opened');
-}
-
-const closePopupEditProfile =  (event) => {
-  if(event.target !== event.currentTarget) {
-    return;
-  }
   popupToggle(overlayEditProfile);
 }
 
@@ -120,34 +115,29 @@ const formEditProfileSubmitHandler = (event) => {
 const openPopupNewPlace = () => {
   newPlaceName.value = '';
   newPlaceImage.value = '';
-  overlayNewPlace.classList.add('overlay_is-opened');
-}
-
-const closePopupNewPlace = (event) => {
-  if(event.target !== event.currentTarget) {
-    return;
-  }
   popupToggle(overlayNewPlace);
 }
 
 const formNewPlaceSubmitHandler = (event) => {
   event.preventDefault();
-    const item = getCards({
+    const item = getCard({
       name: newPlaceName.value,
       link: newPlaceImage.value
     });
-    listCards.prepend(item);
+    cardsList.prepend(item);
     popupToggle(overlayNewPlace);
 }
 
-overlayEditProfile.addEventListener('click', closePopupEditProfile);
+overlayEditProfile.addEventListener('click', (event) => closeOnOverlayClick(event, overlayEditProfile));
+
 buttonEditProfile.addEventListener('click', openPopupEditProfile);
 buttonClosePopupEditProfile.addEventListener('click', () => {
   popupToggle(overlayEditProfile);
 });
 formEditProfile.addEventListener('submit', formEditProfileSubmitHandler);
 
-overlayNewPlace.addEventListener('click', closePopupNewPlace);
+overlayNewPlace.addEventListener('click', (event) => closeOnOverlayClick(event, overlayNewPlace));
+
 buttonNewPlace.addEventListener('click', openPopupNewPlace);
 buttonClosePopupNewPlace.addEventListener('click', () => {
   popupToggle(overlayNewPlace);
