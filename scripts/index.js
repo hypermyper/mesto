@@ -26,33 +26,6 @@ const newPlaceImage = formNewPlace.querySelector('.form__input_image-link');
 const cardsList = document.querySelector('.elements');
 const template = document.querySelector('.template');
 
-const initialCards = [
-  {
-    name: 'Великий Новгород',
-    link: 'https://images.unsplash.com/photo-1600253613497-8a39b8b4a5de?auto=format&fit=crop&w=1200&q=50'
-  },
-  {
-    name: 'Кострома',
-    link: 'https://images.unsplash.com/photo-1591288683417-219a3b9d4e05?auto=format&fit=crop&w=1200&q=50'
-  },
-  {
-    name: 'Нижний Новгород',
-    link: 'https://images.unsplash.com/photo-1569661018634-cb52239785a2?auto=format&fit=crop&w=1200&q=50'
-  },
-  {
-    name: 'Казань',
-    link: 'https://images.unsplash.com/photo-1561398036-dc6755f9f65d?auto=format&fit=crop&w=1200&q=50'
-  },
-  {
-    name: 'Ростов',
-    link: 'https://images.unsplash.com/photo-1524214889128-d155b841834d?auto=format&fit=crop&w=1200&q=50'
-  },
-  {
-    name: 'Рязань',
-    link: 'https://images.unsplash.com/photo-1578820882065-f49c4dde71fe?auto=format&fit=crop&w=1200&q=50'
-  }
-];
-
 const openPopup = (popup) => {
   popup.classList.add('overlay_opened');
   document.body.addEventListener('keydown', closePopupOnEsc);
@@ -61,10 +34,6 @@ const openPopup = (popup) => {
 const closePopup = (popup) => {
   popup.classList.remove('overlay_opened');
   document.body.removeEventListener('keydown', closePopupOnEsc);
-}
-
-const popupToggle = (popup) => {
-  popup.classList.toggle('overlay_opened');
 }
 
 const renderCards = () => {
@@ -76,6 +45,12 @@ const handlerRemove = (evt) => {
   evt.target.closest(".element").remove();
 }
 
+const openPhotoPopup = (data) => {
+  imagePopup.src = data.link;
+  overlayFigureCaption.innerText = data.name;
+  openPopup(overlayImagePopup);
+}
+
 const getCard = (data) => {
   const card = template.content.cloneNode(true);
   const elementPhoto = card.querySelector('.element__photo');
@@ -85,11 +60,7 @@ const getCard = (data) => {
   const removeButton = card.querySelector('.element__trash');
   const favoriteButton = card.querySelector('.element__group');
 
-  elementPhoto.addEventListener('click', () => {
-    imagePopup.src = data.link;
-    overlayFigureCaption.innerText = data.name;
-    openPopup(overlayImagePopup);
-  });
+  elementPhoto.addEventListener('click', () => openPhotoPopup(data));
 
   favoriteButton.addEventListener('click', () => {
     favoriteButton.classList.toggle('element__group_selected');
@@ -115,8 +86,7 @@ const openPopupEditProfile = () => {
   jobInput.value = profileDescription.textContent;
   hideError(nameInput, 'form__input_type_error');
   hideError(jobInput, 'form__input_type_error');
-  buttonSubmitPopupEditProfile.disabled = false;
-  buttonSubmitPopupEditProfile.classList.remove('form__submit-button_invalid');
+  setButtonState(buttonSubmitPopupEditProfile, false, 'form__submit-button_invalid');
   openPopup(overlayEditProfile);
 }
 
@@ -132,8 +102,7 @@ const openPopupNewPlace = () => {
   newPlaceImage.value = '';
   hideError(newPlaceName, 'form__input_type_error');
   hideError(newPlaceImage, 'form__input_type_error');
-  buttonSubmitPopupNewPlace.disabled = true;
-  buttonSubmitPopupNewPlace.classList.add('form__submit-button_invalid');
+  setButtonState(buttonSubmitPopupNewPlace, true, 'form__submit-button_invalid');
   openPopup(overlayNewPlace);
 }
 
@@ -151,7 +120,7 @@ const closePopupOnEsc = (evt) => {
   const activePopup = document.querySelector('.overlay_opened');
   if (evt.key === 'Escape') {
     closePopup(activePopup);
-  };
+  }
 };
 
 overlayEditProfile.addEventListener('click', (evt) => closeOnOverlayClick(evt, overlayEditProfile));

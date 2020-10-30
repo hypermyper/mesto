@@ -10,13 +10,20 @@ const hideError = (input, inputErrorClass) => {
   error.textContent = '';
 }
 
-const toggleButtonState = (buttonElem, isActive, inactiveButtonClass) => {
-  if (isActive) {
-    buttonElem.disabled = false;
+const setButtonState = (buttonElem, buttonState, inactiveButtonClass) => {
+  buttonElem.disabled = buttonState;
+  if (buttonState === false) {
     buttonElem.classList.remove(inactiveButtonClass);
   } else {
-    buttonElem.disabled = true;
     buttonElem.classList.add(inactiveButtonClass);
+  }
+}
+
+const toggleButtonState = (buttonElem, isActive, inactiveButtonClass) => {
+  if (isActive) {
+    setButtonState(buttonElem, false, inactiveButtonClass);
+  } else {
+    setButtonState(buttonElem, true, inactiveButtonClass);
   }
 }
 
