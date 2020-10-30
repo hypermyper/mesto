@@ -27,7 +27,10 @@
 @import url(../blocks/form/__close-icon/form__close-icon.css);
 @import url(../blocks/form/__title/form__title.css);
 @import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__input/_type/form__input_type_error.css);
+@import url(../blocks/form/__input-error/form__input-error.css);
 @import url(../blocks/form/__submit-button/form__submit-button.css);
+@import url(../blocks/form/__submit-button/form__submit-button_invalid.css);
 @import url(../blocks/overlay-figure/overlay-figure.css);
 @import url(../blocks/overlay-figure/__image/overlay-figure__image.css);
 @import url(../blocks/overlay-figure/__caption/overlay-figure__caption.css);

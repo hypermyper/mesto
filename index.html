@@ -32,25 +32,29 @@
   </div>
   <section class="overlay overlay_edit-profile">
     <form class="form form_edit-profile" name="edit-profile">
-      <button type="button" class="form__close-icon form__close-icon_edit-profile"><img src="images/close-icon.svg" alt="Закрыть форму"></button>
+      <button type="button" class="form__close-icon"><img src="images/close-icon.svg" alt="Закрыть форму"></button>
       <h5 class="form__title">Редактировать профиль</h5>
-      <input type="text" name="field_1" class="form__input form__input_name" value="">
-      <input type="text" name="field_2" class="form__input form__input_description" value="">
+      <input id="input-name" type="text" name="input-name" class="form__input form__input_name" value="" autocomplete="off" minlength="2" maxlength="40" required>
+      <span id="input-name-error" class="form__input-error"></span>
+      <input id="input-description" type="text" name="input-description" class="form__input form__input_description" value="" autocomplete="off" minlength="2" maxlength="200" required>
+      <span id="input-description-error" class="form__input-error"></span>
       <button type="submit" class="form__submit-button">Сохранить</button>
     </form>
   </section>
   <section class="overlay overlay_new-place">
     <form class="form form_new-place" name="new-place">
-      <button type="button" class="form__close-icon form__close-icon_new-place"><img src="images/close-icon.svg" alt="Закрыть форму"></button>
+      <button type="button" class="form__close-icon"><img src="images/close-icon.svg" alt="Закрыть форму"></button>
       <h5 class="form__title">Новое место</h5>
-      <input type="text" name="field_1" class="form__input form__input_new-place" value="" placeholder="Название">
-      <input type="text" name="field_2" class="form__input form__input_image-link" value="" placeholder="Ссылка на картинку">
-      <button type="submit" class="form__submit-button">Сохранить</button>
+      <input id="input-new-place" type="text" name="input-new-place" class="form__input form__input_new-place" value="" autocomplete="off" placeholder="Название" minlength="2" maxlength="30" required>
+      <span id="input-new-place-error" class="form__input-error"></span>
+      <input id="input-image-link" type="url" name="input-image-link" class="form__input form__input_image-link" value="" autocomplete="off" placeholder="Ссылка на картинку" required>
+      <span id="input-image-link-error" class="form__input-error"></span>
+      <button type="submit" class="form__submit-button form__submit-button_invalid" disabled>Сохранить</button>
     </form>
   </section>
   <section class="overlay overlay_image-popup">
     <figure class="overlay-figure">
-      <button type="button" class="form__close-icon form__close-icon_image-popup"><img src="images/close-icon.svg" alt="Закрыть форму"></button>
+      <button type="button" class="form__close-icon"><img src="images/close-icon.svg" alt="Закрыть форму"></button>
       <img src="https://images.unsplash.com/photo-1561398036-dc6755f9f65d?auto=format&fit=crop&w=600&q=50" alt="" class="overlay-figure__image">
       <figcaption class="overlay-figure__caption"></figcaption>
     </figure>
@@ -65,6 +69,7 @@
       </div>
     </article>
   </template>
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 </html>

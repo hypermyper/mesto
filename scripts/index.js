@@ -1,7 +1,8 @@
 const buttonEditProfile = document.querySelector('.profile-info__edit-button');
 const overlayEditProfile = document.querySelector('.overlay_edit-profile');
 const formEditProfile = document.querySelector('.form_edit-profile');
-const buttonClosePopupEditProfile = formEditProfile.querySelector('.form__close-icon_edit-profile');
+const buttonClosePopupEditProfile = overlayEditProfile.querySelector('.form__close-icon');
+const buttonSubmitPopupEditProfile = formEditProfile.querySelector('.form__submit-button');
 
 const nameInput = formEditProfile.querySelector('.form__input_name');
 const jobInput = formEditProfile.querySelector('.form__input_description');
@@ -10,13 +11,14 @@ const profileDescription = document.querySelector('.profile-info__description');
 
 const overlayImagePopup = document.querySelector('.overlay_image-popup');
 const imagePopup = document.querySelector('.overlay-figure__image');
-const buttonCloseImagePopup = document.querySelector('.form__close-icon_image-popup');
+const buttonCloseImagePopup = overlayImagePopup.querySelector('.form__close-icon');
 const overlayFigureCaption = document.querySelector('.overlay-figure__caption');
 
 const buttonNewPlace = document.querySelector('.profile__add-button');
 const overlayNewPlace = document.querySelector('.overlay_new-place');
 const formNewPlace = document.querySelector('.form_new-place');
-const buttonClosePopupNewPlace = formNewPlace.querySelector('.form__close-icon_new-place');
+const buttonClosePopupNewPlace = formNewPlace.querySelector('.form__close-icon');
+const buttonSubmitPopupNewPlace = formNewPlace.querySelector('.form__submit-button');
 
 const newPlaceName = formNewPlace.querySelector('.form__input_new-place');
 const newPlaceImage = formNewPlace.querySelector('.form__input_image-link');
@@ -51,6 +53,16 @@ const initialCards = [
   }
 ];
 
+const openPopup = (popup) => {
+  popup.classList.add('overlay_opened');
+  document.body.addEventListener('keydown', closePopupOnEsc);
+}
+
+const closePopup = (popup) => {
+  popup.classList.remove('overlay_opened');
+  document.body.removeEventListener('keydown', closePopupOnEsc);
+}
+
 const popupToggle = (popup) => {
   popup.classList.toggle('overlay_opened');
 }
@@ -60,8 +72,8 @@ const renderCards = () => {
   cardsList.append(...cards);
 }
 
-const handlerRemove = (event) => {
-  event.target.closest(".element").remove();
+const handlerRemove = (evt) => {
+  evt.target.closest(".element").remove();
 }
 
 const getCard = (data) => {
@@ -76,71 +88,85 @@ const getCard = (data) => {
   elementPhoto.addEventListener('click', () => {
     imagePopup.src = data.link;
     overlayFigureCaption.innerText = data.name;
-    popupToggle(overlayImagePopup);
+    openPopup(overlayImagePopup);
   });
 
   favoriteButton.addEventListener('click', () => {
     favoriteButton.classList.toggle('element__group_selected');
   });
   removeButton.addEventListener('click', handlerRemove);
-
   return card;
 }
 
-const closeOnOverlayClick = (event, popup) => {
-  if(event.target !== event.currentTarget) {
+const closeOnOverlayClick = (evt, popup) => {
+  if(evt.target !== evt.currentTarget) {
     return;
   }
-  popupToggle(popup);
+  closePopup(popup);
 }
 
-overlayImagePopup.addEventListener('click', (event) => closeOnOverlayClick(event, overlayImagePopup));
+overlayImagePopup.addEventListener('click', (evt) => closeOnOverlayClick(evt, overlayImagePopup));
 buttonCloseImagePopup.addEventListener('click', () => {
-  popupToggle(overlayImagePopup);
+  closePopup(overlayImagePopup);
 });
 
 const openPopupEditProfile = () => {
   nameInput.value = profileInfo.textContent;
   jobInput.value = profileDescription.textContent;
-  popupToggle(overlayEditProfile);
+  hideError(nameInput, 'form__input_type_error');
+  hideError(jobInput, 'form__input_type_error');
+  buttonSubmitPopupEditProfile.disabled = false;
+  buttonSubmitPopupEditProfile.classList.remove('form__submit-button_invalid');
+  openPopup(overlayEditProfile);
 }
 
-const formEditProfileSubmitHandler = (event) => {
-  event.preventDefault();
+const formEditProfileSubmitHandler = (evt) => {
+  evt.preventDefault();
     profileInfo.textContent = nameInput.value;
     profileDescription.textContent = jobInput.value;
-    popupToggle(overlayEditProfile);
+    closePopup(overlayEditProfile);
 }
 
 const openPopupNewPlace = () => {
   newPlaceName.value = '';
   newPlaceImage.value = '';
-  popupToggle(overlayNewPlace);
+  hideError(newPlaceName, 'form__input_type_error');
+  hideError(newPlaceImage, 'form__input_type_error');
+  buttonSubmitPopupNewPlace.disabled = true;
+  buttonSubmitPopupNewPlace.classList.add('form__submit-button_invalid');
+  openPopup(overlayNewPlace);
 }
 
-const formNewPlaceSubmitHandler = (event) => {
-  event.preventDefault();
+const formNewPlaceSubmitHandler = (evt) => {
+  evt.preventDefault();
     const item = getCard({
       name: newPlaceName.value,
       link: newPlaceImage.value
     });
     cardsList.prepend(item);
-    popupToggle(overlayNewPlace);
+    closePopup(overlayNewPlace);
 }
 
-overlayEditProfile.addEventListener('click', (event) => closeOnOverlayClick(event, overlayEditProfile));
+const closePopupOnEsc = (evt) => {
+  const activePopup = document.querySelector('.overlay_opened');
+  if (evt.key === 'Escape') {
+    closePopup(activePopup);
+  };
+};
+
+overlayEditProfile.addEventListener('click', (evt) => closeOnOverlayClick(evt, overlayEditProfile));
 
 buttonEditProfile.addEventListener('click', openPopupEditProfile);
 buttonClosePopupEditProfile.addEventListener('click', () => {
-  popupToggle(overlayEditProfile);
+  closePopup(overlayEditProfile);
 });
 formEditProfile.addEventListener('submit', formEditProfileSubmitHandler);
 
-overlayNewPlace.addEventListener('click', (event) => closeOnOverlayClick(event, overlayNewPlace));
+overlayNewPlace.addEventListener('click', (evt) => closeOnOverlayClick(evt, overlayNewPlace));
 
 buttonNewPlace.addEventListener('click', openPopupNewPlace);
 buttonClosePopupNewPlace.addEventListener('click', () => {
-  popupToggle(overlayNewPlace);
+  closePopup(overlayNewPlace);
 });
 formNewPlace.addEventListener('submit', formNewPlaceSubmitHandler);
 
