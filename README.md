@@ -1,4 +1,4 @@
-# Проектная работа 6: Место
+# Проектная работа 7: Место
 
 ### Обзор
 
@@ -19,8 +19,10 @@
 * JS-свойство ValidityState
 * слушатели событий
 * Git
+* классы
+* модули
 
 
 **GitHub Pages**
 
-* [Ссылка на GitHub Pages](https://hypermyper.github.io/mesto/)
+* [Ссылка на GitHub Pages](https://kentavrik.ru/)
