@@ -5,3 +5,20 @@
   transition: all ease 0.8s;
   cursor: pointer;
 }
+
+.element__photo:before {
+  content: "\1F3DE";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: #c0c0c0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border: 0;
+  height: 100%;
+  font-size: 52px;
+  color: #000000;
+}

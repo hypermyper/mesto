@@ -1,30 +1,36 @@
+import { initialCards } from './initialCards.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
+const validationConfig = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  buttonSelector: '.form__submit-button',
+  inactiveButtonClass: 'form__submit-button_invalid',
+  inputErrorClass: 'form__input_type_error'
+};
+
 const buttonEditProfile = document.querySelector('.profile-info__edit-button');
 const overlayEditProfile = document.querySelector('.overlay_edit-profile');
 const formEditProfile = document.querySelector('.form_edit-profile');
 const buttonClosePopupEditProfile = overlayEditProfile.querySelector('.form__close-icon');
-const buttonSubmitPopupEditProfile = formEditProfile.querySelector('.form__submit-button');
-
 const nameInput = formEditProfile.querySelector('.form__input_name');
 const jobInput = formEditProfile.querySelector('.form__input_description');
 const profileInfo = document.querySelector('.profile-info__title');
 const profileDescription = document.querySelector('.profile-info__description');
-
 const overlayImagePopup = document.querySelector('.overlay_image-popup');
 const imagePopup = document.querySelector('.overlay-figure__image');
 const buttonCloseImagePopup = overlayImagePopup.querySelector('.form__close-icon');
 const overlayFigureCaption = document.querySelector('.overlay-figure__caption');
-
 const buttonNewPlace = document.querySelector('.profile__add-button');
 const overlayNewPlace = document.querySelector('.overlay_new-place');
 const formNewPlace = document.querySelector('.form_new-place');
 const buttonClosePopupNewPlace = formNewPlace.querySelector('.form__close-icon');
-const buttonSubmitPopupNewPlace = formNewPlace.querySelector('.form__submit-button');
-
 const newPlaceName = formNewPlace.querySelector('.form__input_new-place');
 const newPlaceImage = formNewPlace.querySelector('.form__input_image-link');
-
 const cardsList = document.querySelector('.elements');
-const template = document.querySelector('.template');
+const formEditProfileValidate = new FormValidator(validationConfig, '.form_edit-profile');
+const formNewPlaceValidate = new FormValidator(validationConfig, '.form_new-place');
 
 const openPopup = (popup) => {
   popup.classList.add('overlay_opened');
@@ -36,37 +42,10 @@ const closePopup = (popup) => {
   document.body.removeEventListener('keydown', closePopupOnEsc);
 }
 
-const renderCards = () => {
-  const cards = initialCards.map(card => getCard(card));
-  cardsList.append(...cards);
-}
-
-const handlerRemove = (evt) => {
-  evt.target.closest(".element").remove();
-}
-
-const openPhotoPopup = (data) => {
-  imagePopup.src = data.link;
-  overlayFigureCaption.innerText = data.name;
+export const openPhotoPopup = (link, name) => {
+  imagePopup.src = link;
+  overlayFigureCaption.innerText = name;
   openPopup(overlayImagePopup);
-}
-
-const getCard = (data) => {
-  const card = template.content.cloneNode(true);
-  const elementPhoto = card.querySelector('.element__photo');
-  elementPhoto.src = data.link;
-  elementPhoto.alt = data.name;
-  card.querySelector('.element__title').innerText = data.name;
-  const removeButton = card.querySelector('.element__trash');
-  const favoriteButton = card.querySelector('.element__group');
-
-  elementPhoto.addEventListener('click', () => openPhotoPopup(data));
-
-  favoriteButton.addEventListener('click', () => {
-    favoriteButton.classList.toggle('element__group_selected');
-  });
-  removeButton.addEventListener('click', handlerRemove);
-  return card;
 }
 
 const closeOnOverlayClick = (evt, popup) => {
@@ -76,17 +55,11 @@ const closeOnOverlayClick = (evt, popup) => {
   closePopup(popup);
 }
 
-overlayImagePopup.addEventListener('click', (evt) => closeOnOverlayClick(evt, overlayImagePopup));
-buttonCloseImagePopup.addEventListener('click', () => {
-  closePopup(overlayImagePopup);
-});
-
 const openPopupEditProfile = () => {
   nameInput.value = profileInfo.textContent;
   jobInput.value = profileDescription.textContent;
-  hideError(nameInput, 'form__input_type_error');
-  hideError(jobInput, 'form__input_type_error');
-  setButtonState(buttonSubmitPopupEditProfile, false, 'form__submit-button_invalid');
+  formEditProfileValidate.prepareFormOnOpen();
+
   openPopup(overlayEditProfile);
 }
 
@@ -100,19 +73,18 @@ const formEditProfileSubmitHandler = (evt) => {
 const openPopupNewPlace = () => {
   newPlaceName.value = '';
   newPlaceImage.value = '';
-  hideError(newPlaceName, 'form__input_type_error');
-  hideError(newPlaceImage, 'form__input_type_error');
-  setButtonState(buttonSubmitPopupNewPlace, true, 'form__submit-button_invalid');
+  formNewPlaceValidate.prepareFormOnOpen();
   openPopup(overlayNewPlace);
 }
 
 const formNewPlaceSubmitHandler = (evt) => {
   evt.preventDefault();
-    const item = getCard({
+    const card = new Card({
       name: newPlaceName.value,
       link: newPlaceImage.value
-    });
-    cardsList.prepend(item);
+    }, '.template');
+    const cardElement = card.generateCard();
+    cardsList.prepend(cardElement);
     closePopup(overlayNewPlace);
 }
 
@@ -123,20 +95,31 @@ const closePopupOnEsc = (evt) => {
   }
 };
 
-overlayEditProfile.addEventListener('click', (evt) => closeOnOverlayClick(evt, overlayEditProfile));
+const renderNewCards = () => {
+  initialCards.forEach((item) => {
+    const card = new Card(item, '.template');
+    const cardElement = card.generateCard();
+    cardsList.append(cardElement);
+  });
+}
 
+renderNewCards();
+formEditProfileValidate.enableValidation();
+formNewPlaceValidate.enableValidation();
+
+overlayImagePopup.addEventListener('click', (evt) => closeOnOverlayClick(evt, overlayImagePopup));
+buttonCloseImagePopup.addEventListener('click', () => {
+  closePopup(overlayImagePopup);
+});
+overlayEditProfile.addEventListener('click', (evt) => closeOnOverlayClick(evt, overlayEditProfile));
 buttonEditProfile.addEventListener('click', openPopupEditProfile);
 buttonClosePopupEditProfile.addEventListener('click', () => {
   closePopup(overlayEditProfile);
 });
 formEditProfile.addEventListener('submit', formEditProfileSubmitHandler);
-
 overlayNewPlace.addEventListener('click', (evt) => closeOnOverlayClick(evt, overlayNewPlace));
-
 buttonNewPlace.addEventListener('click', openPopupNewPlace);
 buttonClosePopupNewPlace.addEventListener('click', () => {
   closePopup(overlayNewPlace);
 });
 formNewPlace.addEventListener('submit', formNewPlaceSubmitHandler);
-
-renderCards();
