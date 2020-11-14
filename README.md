@@ -25,4 +25,4 @@
 
 **GitHub Pages**
 
-* [Ссылка на GitHub Pages](https://kentavrik.ru/)
+* [Ссылка на GitHub Pages](https://kentavrik.com/)
