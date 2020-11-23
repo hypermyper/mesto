@@ -1,34 +1,29 @@
-import { initialCards } from './initialCards.js';
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
+import { initialCards,
+  buttonEditProfile,
+  overlayEditProfile,
+  formEditProfile,
+  buttonClosePopupEditProfile,
+  nameInput,
+  jobInput,
+  profileInfo,
+  profileDescription,
+  overlayImagePopup,
+  imagePopup,
+  buttonCloseImagePopup,
+  overlayFigureCaption,
+  buttonNewPlace,
+  overlayNewPlace,
+  formNewPlace,
+  buttonClosePopupNewPlace,
+  newPlaceName,
+  newPlaceImage,
+  cardsList,
+  validationConfig
+} from '../utils/constants.js';
 
-const validationConfig = {
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  buttonSelector: '.form__submit-button',
-  inactiveButtonClass: 'form__submit-button_invalid',
-  inputErrorClass: 'form__input_type_error'
-};
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
 
-const buttonEditProfile = document.querySelector('.profile-info__edit-button');
-const overlayEditProfile = document.querySelector('.overlay_edit-profile');
-const formEditProfile = document.querySelector('.form_edit-profile');
-const buttonClosePopupEditProfile = overlayEditProfile.querySelector('.form__close-icon');
-const nameInput = formEditProfile.querySelector('.form__input_name');
-const jobInput = formEditProfile.querySelector('.form__input_description');
-const profileInfo = document.querySelector('.profile-info__title');
-const profileDescription = document.querySelector('.profile-info__description');
-const overlayImagePopup = document.querySelector('.overlay_image-popup');
-const imagePopup = document.querySelector('.overlay-figure__image');
-const buttonCloseImagePopup = overlayImagePopup.querySelector('.form__close-icon');
-const overlayFigureCaption = document.querySelector('.overlay-figure__caption');
-const buttonNewPlace = document.querySelector('.profile__add-button');
-const overlayNewPlace = document.querySelector('.overlay_new-place');
-const formNewPlace = document.querySelector('.form_new-place');
-const buttonClosePopupNewPlace = formNewPlace.querySelector('.form__close-icon');
-const newPlaceName = formNewPlace.querySelector('.form__input_new-place');
-const newPlaceImage = formNewPlace.querySelector('.form__input_image-link');
-const cardsList = document.querySelector('.elements');
 const formEditProfileValidate = new FormValidator(validationConfig, '.form_edit-profile');
 const formNewPlaceValidate = new FormValidator(validationConfig, '.form_new-place');
 
