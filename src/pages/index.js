@@ -72,8 +72,8 @@ const cardList = new Section({
       });
     const cardElement = card.generateCard();
     cardList.addItem(cardElement);
-	  }
-  }, elementsClass
+	}
+}, elementsClass
 );
 
 buttonEditProfile.addEventListener('click', () => {
