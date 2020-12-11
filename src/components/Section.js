@@ -4,9 +4,10 @@ export default class Section {
     this._renderer = renderer;
     this._container = document.querySelector(containerSelector);
   }
-  renderItems() {
+  renderItems(userData) {
     this._renderedItems.forEach(item => {
-      this._renderer(item);
+      this._renderer(item, userData);
+      //console.log(item.owner);
     });
   }
   addItem(element) {
@@ -14,5 +15,8 @@ export default class Section {
   }
   addNewItem(element) {
     this._container.prepend(element);
+  }
+  setRenderedItems(data) {
+    this._renderedItems = data;
   }
 }

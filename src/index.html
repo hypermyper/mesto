@@ -12,15 +12,17 @@
     </header>
     <main>
       <section class="profile">
-        <img src="<%=require('./images/jacques-yves_cousteau.jpg')%>" alt="Жак-Ив Кусто" class="profile__avatar">
+        <div class="profile__avatar">
+          <img src="<%=require('./images/avatar.png')%>" alt="" title="" class="profile__avatar-image">
+        </div>
         <div class="profile-info">
           <div class="profile-info__title-wrap">
-            <h1 class="profile-info__title">Жак-Ив Кусто</h1>
+            <h1 class="profile-info__title"></h1>
             <button type="button" class="profile-info__edit-button">
               <img src="<%=require('./images/edit_button.svg')%>" alt="Редактировать информацию">
             </button>
           </div>
-          <p class="profile-info__description">Исследователь океана</p>
+          <p class="profile-info__description"></p>
         </div>
         <button type="button" class="profile__add-button"></button>
       </section>
@@ -40,6 +42,15 @@
       <button type="submit" class="form__submit-button">Сохранить</button>
     </form>
   </section>
+  <section class="overlay overlay_edit-profile-avatar">
+    <form class="form form_edit-profile-avatar" name="edit-profile-avatar">
+      <button type="button" class="form__close-icon"><img src="<%=require('./images/close-icon.svg')%>" alt="Закрыть форму"></button>
+      <h5 class="form__title">Обновить аватар</h5>
+      <input id="input-avatar" type="url" name="input-avatar" class="form__input form__input_avatar" value="" autocomplete="off" required>
+      <span id="input-avatar-error" class="form__avatar-error"></span>
+      <button type="submit" class="form__submit-button">Сохранить</button>
+    </form>
+  </section>
   <section class="overlay overlay_new-place">
     <form class="form form_new-place" name="new-place">
       <button type="button" class="form__close-icon"><img src="<%=require('./images/close-icon.svg')%>" alt="Закрыть форму"></button>
@@ -49,6 +60,13 @@
       <input id="input-image-link" type="url" name="input-image-link" class="form__input form__input_image-link" value="" autocomplete="off" placeholder="Ссылка на картинку" required>
       <span id="input-image-link-error" class="form__input-error"></span>
       <button type="submit" class="form__submit-button form__submit-button_invalid" disabled>Сохранить</button>
+    </form>
+  </section>
+  <section class="overlay overlay_delete-card">
+    <form class="form form_delete-card" name="delete-card">
+      <button type="button" class="form__close-icon"><img src="<%=require('./images/close-icon.svg')%>" alt="Закрыть форму"></button>
+      <h5 class="form__title">Вы уверены?</h5>
+      <button type="submit" class="form__submit-button">Да</button>
     </form>
   </section>
   <section class="overlay overlay_image-popup">
@@ -64,7 +82,10 @@
       <img src="" class="element__photo" alt="">
       <div class="element__body">
         <h3 class="element__title"></h3>
-        <button type="button" class="element__group"></button>
+        <div class="element__like-group">
+          <button type="button" class="element__like-button"></button>
+          <p class="element__like-quantity">0</p>
+        </div>
       </div>
     </article>
   </template>
