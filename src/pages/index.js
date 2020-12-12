@@ -62,13 +62,11 @@ const formEditProfileClass = new PopupWithForm({
   popupSelector: overlayEditProfile,
   handleSubmitForm: (input) => {
     renderLoading(overlayEditProfile, true);
-    //console.log(input['input-name']);
       api.updateUserInfo({
         name: input['input-name'],
         about: input['input-description']
       })
       .then(data => {
-        //console.log(data);
 				user.setUserInfo(data._id, data.name, data.about, data.avatar);
         formEditProfileClass.close();
         renderLoading(overlayEditProfile, false);
@@ -98,13 +96,13 @@ const formNewPlaceClass = new PopupWithForm({
 			name: input['input-new-place'],
 			link: input['input-image-link']
 		})
-			.then(data => {
-				const card = renderCard(data, '.template', user.getUserInfo());
-        const cardElement = card.generateCard();
-        cardList.addNewItem(cardElement);
-        renderLoading(overlayNewPlace, false);
-        formNewPlaceClass.close();
-      });
+    .then(data => {
+      const card = renderCard(data, '.template', user.getUserInfo());
+      const cardElement = card.generateCard();
+      cardList.addNewItem(cardElement);
+      renderLoading(overlayNewPlace, false);
+      formNewPlaceClass.close();
+    });
   }
 });
 
@@ -113,14 +111,14 @@ const formDeleteCard = new PopupWithDeleteCard({
 	handleSubmitForm: ( {element, cardId} ) => {
     renderLoading(overlayDeleteCard, true);
 		api.deleteCard(cardId)
-			.then(() => {
-        element.remove();
-        renderLoading(overlayDeleteCard, false);
-				formDeleteCard.close();
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+    .then(() => {
+      element.remove();
+      renderLoading(overlayDeleteCard, false);
+      formDeleteCard.close();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 	}
 });
 

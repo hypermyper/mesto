@@ -1,3 +1,4 @@
+export const escapeKey = 'Escape';
 export const buttonEditProfile = document.querySelector('.profile-info__edit-button');
 export const overlayEditProfile = '.overlay_edit-profile';
 export const overlayEditProfileAvatar = '.overlay_edit-profile-avatar';
